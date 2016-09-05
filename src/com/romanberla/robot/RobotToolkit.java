@@ -1,3 +1,5 @@
+package com.romanberla.robot;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,8 +32,8 @@ public class RobotToolkit {
 		}
 	}
 
-	private static void executeActions(LinkedList<Action> actions) {
-		for(Action a : actions) {
+	private static void executeActions(LinkedList<com.romanberla.robot.Action> actions) {
+		for(com.romanberla.robot.Action a : actions) {
 			a.execute();
 			try {
 				Thread.sleep(TIME_BETWEEN_ACTIONS);
@@ -140,14 +142,14 @@ public class RobotToolkit {
 		}
 	}
 
-	private static LinkedList<Action> getActionsFromFile(String fileURL) {
+	private static LinkedList<com.romanberla.robot.Action> getActionsFromFile(String fileURL) {
 		try {
 			Scanner s = new Scanner(new File(fileURL));
 			StringBuilder builder = new StringBuilder();
 			while(s.hasNextLine()) {
 				builder.append(s.nextLine());
 			}
-			LinkedList<Action> actionsFromFile = convertTextToActions(builder.toString());
+			LinkedList<com.romanberla.robot.Action> actionsFromFile = convertTextToActions(builder.toString());
 			return actionsFromFile;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -156,7 +158,7 @@ public class RobotToolkit {
 	}
 
 	public static void executeActionsFromFile(String fileURL) {
-		LinkedList<Action> actionsFromFile = getActionsFromFile(fileURL);
+		LinkedList<com.romanberla.robot.Action> actionsFromFile = getActionsFromFile(fileURL);
 		if(actionsFromFile != null) {
 			executeActions(actionsFromFile);
 		}
@@ -164,12 +166,12 @@ public class RobotToolkit {
 
 	private enum LoopState {NO_LOOP, ADDING_TO_LOOP, LOOPING;}
 	LoopState loopState = LoopState.NO_LOOP;
-	private static LinkedList<Action> convertTextToActions (String inputText) {
+	private static LinkedList<com.romanberla.robot.Action> convertTextToActions (String inputText) {
 
-		LinkedList<Action> resultActions = new LinkedList<Action>();
+		LinkedList<com.romanberla.robot.Action> resultActions = new LinkedList<com.romanberla.robot.Action>();
 
 		LoopState loopState = LoopState.NO_LOOP;
-		LinkedList<Action> loopActions = new LinkedList<Action>();
+		LinkedList<com.romanberla.robot.Action> loopActions = new LinkedList<com.romanberla.robot.Action>();
 		int numberOfActionsLeftToAddToLoop = 0;
 		int loopRepeatsLeft = 0;
 
@@ -252,7 +254,7 @@ public class RobotToolkit {
 
 			} else if (loopState == LoopState.LOOPING) {
 				for(int i = 0; i < loopRepeatsLeft; i ++) {
-					for (Action a : loopActions) {
+					for (com.romanberla.robot.Action a : loopActions) {
 						resultActions.add(a);
 					}
 				}

@@ -1,3 +1,5 @@
+package com.romanberla.robot;
+
 import java.awt.event.InputEvent;
 
 /**
