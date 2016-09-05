@@ -1,0 +1,16 @@
+ wait 100
+ click 1919 1079
+ wait 500
+ dclick  1784 660
+ wait 5000
+ click  898 595
+ wait 1000
+ type Roman_Berla_US#123*
+  wait 8000
+
+ wait 40000
+ click  345 442
+ repeat 2 250
+ type `
+ down 1
+ 
